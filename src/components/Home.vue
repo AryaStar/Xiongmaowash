@@ -20,7 +20,7 @@
            <!-- :unique-opened="true"->只允许展开一个菜单 -->
            <!-- :collapse-transition="false" -> 关闭动画 -->
            <!-- router -> 导航开启路由模式 -->
-          <!-- 一级菜单  -->
+          <!-- 一级菜单 ，item.id是数字，加上‘’表示字符串 -->
           <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id" >
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
@@ -82,13 +82,13 @@ export default {
       const { data: res } = await this.$http.get('menus')
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.menuList = res.data
-      // console.log(res)
+      console.log(res)
     },
     // 菜单的折叠与展开
     togleCollapse () {
       this.isCollapse = !this.isCollapse
     },
-    // 保存连接的激活地址
+    // 保存连接的激活地址,用于将侧边栏二级菜单高亮
     saveNavState (activePath) {
       window.sessionStorage.setItem('activePath', activePath)
     }
